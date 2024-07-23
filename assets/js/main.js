@@ -182,32 +182,46 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
   
-/**
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission
 
-  const formData = new FormData(this);
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-  fetch('contact.php', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-    if (data.trim() === 'OK') {
-      document.getElementById('sent-message').style.display = 'block';
-      this.reset(); // Reset the form
-    } else {
-      document.getElementById('error-message').textContent = data;
-      document.getElementById('error-message').style.display = 'block';
-    }
-  })
-  .catch(error => {
-    document.getElementById('error-message').textContent = error.message;
-    document.getElementById('error-message').style.display = 'block';
+    const form = event.target;
+    const formData = new FormData(form);
+    const loadingMessage = document.getElementById('loading');
+    const errorMessage = document.getElementById('error-message');
+    const sentMessage = document.getElementById('sent-message');
+
+    // Show loading message
+    loadingMessage.style.display = 'block';
+    errorMessage.style.display = 'none';
+    sentMessage.style.display = 'none';
+
+    // Convert form data to a URL-encoded string
+    const formBody = new URLSearchParams(formData).toString();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formBody
+    })
+    .then(response => {
+      loadingMessage.style.display = 'none';
+      if (response.ok) {
+        sentMessage.style.display = 'block';
+        form.reset();
+      } else {
+        errorMessage.textContent = 'Oops! Something went wrong.';
+        errorMessage.style.display = 'block';
+      }
+    })
+    .catch(error => {
+      loadingMessage.style.display = 'none';
+      errorMessage.textContent = 'Oops! Something went wrong.';
+      errorMessage.style.display = 'block';
+    });
   });
-});
 
-*/																					 
+																				 
 
 })();
