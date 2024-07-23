@@ -1,4 +1,13 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/old-page"
+  to = "/new-page"
+  status = 301
+
 [[headers]]
-for = "/*"
+  for = "/*"
   [headers.values]
-  X-Robots-Tag = "index"
+    x-robots-tag = "index, follow"
