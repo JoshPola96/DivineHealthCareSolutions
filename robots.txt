@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://main--divinehealthcaresolutions.netlify.app/sitemap.xml
+Sitemap: http://www.example.com/sitemap.xml
